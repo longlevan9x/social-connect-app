@@ -36,9 +36,9 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
 app.get('/', (req: Request, res: Response) => { res.send({ message: 'Welcome to Facebook OAuth' }) });  
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI!)
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
+// mongoose.connect(process.env.MONGODB_URI!)
+//     .then(() => console.log('MongoDB connected'))
+//     .catch(err => console.log(err));
 
 // Start server
 const PORT = process.env.PORT || 3000;

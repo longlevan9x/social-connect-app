@@ -4,11 +4,11 @@
   "description": "A Node.js application to connect with Facebook for authentication.",
   "main": "src/app.ts",
   "scripts": {
-    "start": "ts-node src/app.ts",
+    "start": "node dist/app.js",
     "build": "tsc",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec npx ts-node src/app.ts",
     "lint": "eslint 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts,json,md}'"
-
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -36,9 +36,10 @@
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.0.0"
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5"
   },
   "author": "",
   "license": "ISC"
