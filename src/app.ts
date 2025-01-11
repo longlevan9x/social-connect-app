@@ -33,7 +33,7 @@ passport.use(new FacebookStrategy({
 const facebookController = new FacebookController();
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), (req: Request, res: Response) => facebookController.callback(req, res));
-// app.get('/', (req: Request, res: Response) => res.send({ message: 'Welcome to Facebook OAuth' }));
+app.get('/', (req: Request, res: Response) => { res.send({ message: 'Welcome to Facebook OAuth' }) });  
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI!)
