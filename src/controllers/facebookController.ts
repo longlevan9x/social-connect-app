@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import User, { IUser } from '../models/user';
 
 class FacebookController {
@@ -10,15 +11,19 @@ class FacebookController {
         // Logic for handling the callback from Facebook after authentication
         try {
             const reqUser: IUser = req.user as IUser;
-            const user = await User.findOne({ facebookId: reqUser?.facebookId });
+            let user = await User.findOne({ facebookId: reqUser?.facebookId });
             if (!user) {
-                const newUser = new User({
+                user = new User({
                     facebookId: reqUser?.facebookId,
                     name: reqUser?.name,
                 });
-                await newUser.save();
+                await user.save();
             }
-            res.send('Facebook authentication successful');
+
+            // Create JWT token
+            const token = jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+
+            res.json({ message: 'Facebook authentication successful', token });
         } catch (error) {
             res.status(500).send('Error during Facebook authentication');
         }
